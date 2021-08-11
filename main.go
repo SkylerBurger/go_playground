@@ -7,7 +7,19 @@ import (
 	"strconv"
 )
 
-func main () {
+func returnGreetingFunc (salutation string) (greetingFunc func (string)) {
+	greetingFunc = func (name string) {
+		fmt.Printf("%v, %v", salutation, name)
+	}
+	return
+}
+
+func main() {
+	newFunc := returnGreetingFunc("Good morning")
+	newFunc("Skyler")
+}
+
+func intro () {
 	scanner := bufio.NewScanner(os.Stdin)
 	
 	// Name as String
@@ -15,7 +27,6 @@ func main () {
 	scanner.Scan()
 	name := scanner.Text()
 	
-	// Age as Int8 (0-255)
 	fmt.Print("What is your age?: ")
 	scanner.Scan()
 	age, _ := strconv.ParseInt(scanner.Text(), 10, 8)
